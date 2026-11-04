@@ -6,7 +6,9 @@ function App() {
 
   useEffect(()=> {
     (async () => {
-      let res = await fetch("https://api.aredl.net/v2/api/aredl/levels/1")
+      let randomMainList = Math.floor(Math.random() * 151)
+
+      let res = await fetch(`https://api.aredl.net/v2/api/aredl/levels/${randomMainList}`)
       let lvl = await res.json()
 
       console.log(lvl)
