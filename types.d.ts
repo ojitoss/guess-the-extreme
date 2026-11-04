@@ -4,12 +4,12 @@ export type LevelStatus =
   | "Legacy"
   | "Removed";
 
-export interface Publisher {
+
+export interface User {
   id: string;
   username: string;
   global_name: string;
 }
-
 export interface Verification {
   id: string;
   submitted_by: User;
@@ -19,12 +19,6 @@ export interface Verification {
   achieved_at: string;
   created_at: string;
   updated_at: string;
-}
-
-export interface User {
-  id: string;
-  username: string;
-  global_name: string;
 }
 
 export interface Level {
@@ -43,7 +37,7 @@ export interface Level {
   is_edel_pending: boolean;
   gddl_tier: number | null;
   nlw_tier: string | null;
-  publisher: Publisher;
+  publisher: User;
   verifications: Verification[];
 }
 
