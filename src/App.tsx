@@ -1,7 +1,8 @@
+import { type Level } from '../types.d'
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [level, setLevel] = useState({})
+  const [level, setLevel] = useState<Level>({})
   const [verificationVideo, setVerificationVideo] = useState('')
 
   useEffect(()=> {
@@ -9,7 +10,7 @@ function App() {
       let randomMainList = Math.floor(Math.random() * 151)
 
       let res = await fetch(`https://api.aredl.net/v2/api/aredl/levels/${randomMainList}`)
-      let lvl = await res.json()
+      let lvl: Level = await res.json()
 
       console.log(lvl)
       setLevel(lvl)
