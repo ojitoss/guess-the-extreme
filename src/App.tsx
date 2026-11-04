@@ -1,9 +1,9 @@
-import { type Level } from '../types.d'
+import { type Level, type YouTubeVideo } from '../types.d'
 import { useState, useEffect } from 'react'
 
 function App() {
   const [level, setLevel] = useState<Level>({})
-  const [verificationVideo, setVerificationVideo] = useState('')
+  const [verificationVideo, setVerificationVideo] = useState<YouTubeVideo>({})
 
   useEffect(()=> {
     (async () => {
