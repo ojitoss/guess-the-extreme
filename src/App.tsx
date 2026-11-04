@@ -1,25 +1,38 @@
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [levels, setLevels] = useState([]);
+  const [level, setLevel] = useState({})
+  const [verificationVideo, setVerificationVideo] = useState('')
 
   useEffect(()=> {
-    fetch("https://api.aredl.net/v2/api/aredl/levels")
-      .then(res => res.json())
-      .then(res => {
-        setLevels(res)
-      })
-  })
+    (async () => {
+      let res = await fetch("https://api.aredl.net/v2/api/aredl/levels/1")
+      let lvl = await res.json()
+
+      console.log(lvl)
+      setLevel(lvl)
+      
+      let url = lvl.verifications[0].video_url
+      
+      let res2 = await fetch(`https://www.youtube.com/oembed?url=${url}&format=json`)
+      let videoInfo = await res2.json()
+      setVerificationVideo(videoInfo)
+    })()
+  }, [])
 
   return (
     <>
-      <ol>
-        {levels.map((level) => {
-          return (
-            <li>{level.name}</li>
-          )
-        })}
-      </ol>
+      <h2>
+        #{level.position}. {level.name}
+      </h2>
+      
+      <img 
+        src={verificationVideo.thumbnail_url} 
+        height={verificationVideo.thumbnail_height}
+        width={verificationVideo.thumbnail_width}
+      />
+
+      {level.description}
     </>
   )
 }
